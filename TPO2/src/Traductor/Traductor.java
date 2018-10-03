@@ -6,4 +6,5 @@ package Traductor;
  */
 public class Traductor {
     //Comentario random sin sentido 
+    
 }
