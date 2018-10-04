@@ -14,6 +14,10 @@ public class Mensaje {
     private char[] caracteres;
 
     //Constructores
+    public Mensaje(){
+        this.caracteres = null;
+    }
+    
     public Mensaje(String cadena) {
         this.caracteres = cadena.toCharArray();
     }
