@@ -6,17 +6,8 @@ import java.util.concurrent.*;
 public class Traductor_Main {
 
     public static void main(String[] args) {
-
-        Mensaje mensaje = new Mensaje ("Este es un mensaje de prueba de la encriptacion AJJAJA xd 1234");
-        /* Muestra el arreglo antes de realizar la accion
-        
-        System.out.print("Arreglo: {");
-        for (int i = 0; i < arreglo.length; i++) {
-            System.out.print(arreglo[i] + ", ");
-        }
-        System.out.print(" }");
-        
-         */
+        String cadena = "Este es un mensaje de prueba de la encriptacion AJJAJA xd 1234";
+        Mensaje mensaje = new Mensaje (cadena);
         Traductor tarea = new Traductor(mensaje , 0, mensaje.longitud());
         ForkJoinPool pool = new ForkJoinPool();
         pool.execute(tarea);
