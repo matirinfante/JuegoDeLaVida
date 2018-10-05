@@ -30,8 +30,7 @@ public class Traductor extends RecursiveAction {
         if (this.ultimoElem - this.primerElem < this.EPT) {
             rot47();
             //System.out.println("Completado de " + this.primerElem + ", al: " + this.ultimoElem);
-
-        } else {
+       } else {
 
             int mitad = (this.ultimoElem + this.primerElem) / 2;
            // System.out.println("Tares pendientes: " + getQueuedTaskCount());
