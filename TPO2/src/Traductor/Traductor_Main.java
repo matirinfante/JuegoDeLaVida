@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 public class Traductor_Main {
 
     public static void main(String[] args) {
+        //Testeando github en linux
         //Declaracion de Variables
         Mensaje mensaje = new Mensaje();
         String contraseña = "1234"; //Contraseña por defecto
