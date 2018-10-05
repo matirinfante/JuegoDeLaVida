@@ -13,7 +13,7 @@ public class Traductor_Main {
         String contraseña = "1234";
         String password;
         String cadena = "";
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         int opcion;
         boolean salir = false;
         boolean enviado = false;
@@ -51,7 +51,7 @@ public class Traductor_Main {
                             pool.shutdown();
 
                             //System.out.println("Mensaje Enviado");
-                            JOptionPane.showMessageDialog(null, "Mensaje Enviado" + mensaje.getCadena());
+                            JOptionPane.showMessageDialog(null, "Mensaje Enviado: " + mensaje.getCadena());
                             enviado = true;
                         } else {
                             //System.out.println("Contraseña Incorrecta");
