@@ -6,7 +6,6 @@ import java.util.concurrent.RecursiveTask;
 
 public class Traductor extends RecursiveAction {
 
-    //private final char[] arreglo;
     private final int primerElem;
     private final int ultimoElem;
     private final Mensaje mensaje;
@@ -16,7 +15,7 @@ public class Traductor extends RecursiveAction {
 
     //Constructor
     public Traductor(Mensaje msj, int primer, int ultimo) {
-        //this.clave = key; //Clave de encriptacion
+        
         this.mensaje = msj; //Mensaje a encriptar
         this.primerElem = primer; //Primer elemento del arreglo
         this.ultimoElem = ultimo; //Ultimo elemento del arreglo
