@@ -121,12 +121,12 @@ public class Traductor_Main {
                     break;
                 case 5: //Salir
                     JOptionPane.showMessageDialog(null, "Adios");
-                    System.out.println("Adios");
+                    //System.out.println("Adios");
                     salir = true;
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Ingrese una opcion valida");
-                    System.out.println("Ingrese una opcion valida");
+                    //System.out.println("Ingrese una opcion valida");
 
             }//Switch
         }//While
