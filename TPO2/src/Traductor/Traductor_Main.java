@@ -10,7 +10,7 @@ public class Traductor_Main {
     public static void main(String[] args) {
         //Declaracion de Variables
         Mensaje mensaje = new Mensaje();
-        String contraseña = "1234";
+        String contraseña = "1234"; //Contraseña por defecto
         String password;
         String cadena = "";
         //Scanner scanner = new Scanner(System.in);
@@ -126,12 +126,14 @@ public class Traductor_Main {
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Ingrese una opcion valida");
-                    //System.out.println("Ingrese una opcion valida");
+                //System.out.println("Ingrese una opcion valida");
 
             }//Switch
         }//While
     }//Main
 
+    /*
+    //Menu Mostrado por consola
     public static void menu() {
         System.out.println("+---------------------------------------+");
         System.out.println("|       Seleccione a una opcion         |");
@@ -143,5 +145,5 @@ public class Traductor_Main {
         System.out.println("| 5 - Salir                             |");
         System.out.println("+---------------------------------------+");
     }
-
+     */
 }
