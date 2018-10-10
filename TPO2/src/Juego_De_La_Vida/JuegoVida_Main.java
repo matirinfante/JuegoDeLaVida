@@ -14,19 +14,19 @@ public class JuegoVida_Main {
         JuegoVida tarea = new JuegoVida(tablero, 0, 10);
         //tarea.Jugar();
         /**/
+
         ForkJoinPool pool = new ForkJoinPool();
         pool.execute(tarea);
         do {
             try {
-                TimeUnit.MILLISECONDS.sleep(5);
+                TimeUnit.MILLISECONDS.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         } while (!tarea.isDone());
         pool.shutdown();
-        
+
         //System.out.println(tablero.aCadenaBooleano());
         System.out.println(tablero.aCadena());
-
     }
 }
