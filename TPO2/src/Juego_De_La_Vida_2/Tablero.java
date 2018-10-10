@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Juego_De_La_Vida_2;
+package laboratorioprogramacion;
 
 /**
  *
@@ -45,13 +45,23 @@ public class Tablero {
         } else {
             Posicion[] erCuadrante = new Posicion[2];
             erCuadrante[0] = new Posicion(0, 0);
-            erCuadrante[1] = new Posicion((cantFilas / 2) - 1, (cantColumnas / 2) - 1); // accede a la posicion de la mitad mas uno
+            erCuadrante[1] = new Posicion((cantFilas / 2) - 1, (cantColumnas / 2) - 1);
             cuadrantes[0] = erCuadrante;
-            
+
             Posicion[] segundoCuadrante = new Posicion[2];
             segundoCuadrante[0] = new Posicion(0, ((cantFilas / 2) - 1) + 1);
-            segundoCuadrante[1] = new Posicion( (((cantFilas / 2) - 1)), ((cantFilas / 2) - 1) + 1); // accede a la posicion de la mitad mas uno
-            cuadrantes[0] = segundoCuadrante;
+            segundoCuadrante[1] = new Posicion((((cantFilas / 2) - 1)), ((cantFilas) - 1));
+            cuadrantes[1] = segundoCuadrante;
+
+            Posicion[] tercerCuadrante = new Posicion[2];
+            tercerCuadrante[0] = new Posicion(((cantFilas / 2)), 0);
+            tercerCuadrante[1] = new Posicion(cantFilas - 1, (cantColumnas / 2) - 1);
+            cuadrantes[2] = tercerCuadrante;
+
+            Posicion[] cuartoCuadrante = new Posicion[2];
+            cuartoCuadrante[0] = new Posicion(((cantFilas / 2)), (cantColumnas / 2));
+            cuartoCuadrante[1] = new Posicion(cantFilas - 1, cantColumnas - 1);
+            cuadrantes[3] = cuartoCuadrante;
         }
     }
 
@@ -67,6 +77,10 @@ public class Tablero {
         return celulas;
     }
 
+    public Posicion[] getCuadrante(int cuadrante){
+        return this.cuadrantes[cuadrante];
+    }
+    
     public static int getCANTFILAS() {
         return CANTFILAS;
     }

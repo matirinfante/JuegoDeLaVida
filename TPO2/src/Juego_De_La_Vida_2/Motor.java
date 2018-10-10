@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Juego_De_La_Vida_2;
+package laboratorioprogramacion;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-//import laboratorioprogramacion.Tarea;
 
 /**
  *

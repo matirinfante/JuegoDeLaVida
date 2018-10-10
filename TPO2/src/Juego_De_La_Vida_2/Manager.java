@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Juego_De_La_Vida_2;
+package laboratorioprogramacion;
 
 /**
  *
