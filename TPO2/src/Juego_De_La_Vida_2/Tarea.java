@@ -5,6 +5,9 @@
  */
 package laboratorioprogramacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Kurito
@@ -56,7 +59,14 @@ public class Tarea implements Runnable {
             for (int i = cuadrante[0].getX(); i < cuadrante[1].getY(); i++) {
                 for (int j = cuadrante[0].getX(); j < cuadrante[1].getY(); j++) {
                     verificarCelulasAlrededor(new Posicion(i, j));
+
                 }
+            }
+            try {
+                System.out.println("La tarea " + nroTarea + " está verificando el cuadrante " + this.nroCuadrante);
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Tarea.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             for (int i = cuadrante[0].getX(); i < cuadrante[1].getY(); i++) {
@@ -66,6 +76,12 @@ public class Tarea implements Runnable {
                         objCelula.setEstado(!objCelula.getEstado());
                     }
                 }
+            }
+            try {
+                System.out.println("La tarea " + nroTarea + " está cambiando el cuadrante " + this.nroCuadrante);
+                Thread.sleep(3000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Tarea.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
