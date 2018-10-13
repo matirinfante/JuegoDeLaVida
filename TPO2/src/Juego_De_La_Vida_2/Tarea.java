@@ -53,14 +53,14 @@ public class Tarea implements Runnable {
         //variable verificando y cambiando hay que hacerlos como variable compartida
         Posicion[] cuadrante = tablero.getCuadrante(this.nroCuadrante);
         if (variable.isEstaverificando()) {
-            for (int i = cuadrante[0].getX(); i < cuadrante[0].getY(); i++) {
-                for (int j = cuadrante[1].getX(); j < cuadrante[1].getY(); j++) {
+            for (int i = cuadrante[0].getX(); i < cuadrante[1].getY(); i++) {
+                for (int j = cuadrante[0].getX(); j < cuadrante[1].getY(); j++) {
                     verificarCelulasAlrededor(new Posicion(i, j));
                 }
             }
         } else {
-            for (int i = cuadrante[0].getX(); i < cuadrante[0].getY(); i++) {
-                for (int j = cuadrante[1].getX(); j < cuadrante[1].getY(); j++) {
+            for (int i = cuadrante[0].getX(); i < cuadrante[1].getY(); i++) {
+                for (int j = cuadrante[0].getX(); j < cuadrante[1].getY(); j++) {
                     Celula objCelula = tablero.getCelula(new Posicion(i, j));
                     if (objCelula.getdebeCambiar()) {
                         objCelula.setEstado(!objCelula.getEstado());
