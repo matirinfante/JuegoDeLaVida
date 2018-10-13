@@ -35,9 +35,9 @@ public class Motor {
         executor.execute(tarea);// Ejecuta una tarea 
     }
     
-    public void esperarTareas(){
-        executor.invokeAll(null);
-    }
+//    public void esperarTareas(){
+//        executor.invokeAll(null);
+//    }
 
     public void terminaServidor() {
         executor.shutdown();// Este metodo termina el executor  

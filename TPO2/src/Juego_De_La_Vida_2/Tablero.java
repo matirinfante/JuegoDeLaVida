@@ -15,8 +15,8 @@ import java.util.Random;
 public class Tablero {
 
     private Celula[][] celulas;
-    private static final int CANTFILAS = 5;
-    private static final int CANTCOLUMNAS = 5;
+    private static final int CANTFILAS = 6;
+    private static final int CANTCOLUMNAS = 6;
     private boolean estaVerificando;
     private Posicion[][] cuadrantes;
 
@@ -26,6 +26,21 @@ public class Tablero {
         this.calcularCuadrantes();
         this.llenarMatriz();
         this.generarAleatoriamente();
+    }
+
+    public void mostrarTablero() {
+        String estado;
+        for (int i = 0; i < CANTFILAS; i++) {
+            for (int j = 0; j < CANTFILAS; j++) {
+                if (celulas[i][j].getEstado()) {
+                    estado = "O";
+                } else {
+                    estado = "X";
+                }
+                System.out.print(" | " + estado + " | ");
+            }
+            System.out.println("");
+        }
     }
 
     private void calcularCuadrantes() {
@@ -78,17 +93,16 @@ public class Tablero {
         int celulasVivas = 10;
         ArrayList<Posicion> posiciones = new ArrayList();
         int x, y;
-        
 
         for (int i = 0; i < celulasVivas; i++) {
             Random rand = new Random();
-            x = rand.nextInt(5 - 1 + 1) + 1;
-            y = rand.nextInt(5 - 1 + 1) + 1;
+            x = rand.nextInt(CANTFILAS - 1 + 1) + 1;
+            y = rand.nextInt(CANTCOLUMNAS - 1 + 1) + 1;
             Posicion posicionNueva = new Posicion(x, y);
             if (!posiciones.contains(new Posicion(x, y))) {
                 while (posiciones.contains(posicionNueva)) {
-                    x = rand.nextInt(5 - 1 + 1) + 1;
-                    y = (int) rand.nextInt(5 - 1 + 1) + 1;
+                    x = rand.nextInt(CANTFILAS - 1 + 1) + 1;
+                    y = rand.nextInt(CANTCOLUMNAS - 1 + 1) + 1;
                     posicionNueva = new Posicion(x, y);
 
                 }
@@ -98,7 +112,7 @@ public class Tablero {
             }
         }
         posiciones.forEach((posicion) -> {
-            celulas[posicion.getX()-1][posicion.getY()-1] = new Celula(0, true);
+            celulas[posicion.getX() - 1][posicion.getY() - 1] = new Celula(0, true);
         });
     }
 
@@ -124,13 +138,13 @@ public class Tablero {
 
     private void llenarMatriz() {
         int nroCelula = 1;
-        for(int i=0; i < CANTFILAS ; i++){
-            for(int j=0; j < CANTCOLUMNAS;j++ ){
-                celulas[i][j] = new Celula(nroCelula,false);
+        for (int i = 0; i < CANTFILAS; i++) {
+            for (int j = 0; j < CANTCOLUMNAS; j++) {
+                celulas[i][j] = new Celula(nroCelula, false);
                 nroCelula++;
             }
         }
-        
+
     }
 
 }

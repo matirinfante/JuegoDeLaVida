@@ -9,7 +9,7 @@ package laboratorioprogramacion;
  *
  * @author Kurito
  */
-public class Manager{
+public class Manager {
 
     public boolean estaverificando;
     public boolean estaCambiando;
@@ -22,9 +22,20 @@ public class Manager{
 
     public synchronized void terminoTarea() {
         hilosActual++;
+        if (hilosActual == 4) {
+            hilosActual = 0;
+            if (estaverificando) {
+                estaverificando = false;
+                estaCambiando = true;
+            } else {
+                estaverificando = true;
+                estaCambiando = false;
+            }
+        }
+
     }
 
-    public void resetCantHilos() {
+    public synchronized void resetCantHilos() {
         hilosActual = 0;
     }
 
