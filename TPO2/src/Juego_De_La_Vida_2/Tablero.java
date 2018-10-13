@@ -5,6 +5,9 @@
  */
 package laboratorioprogramacion;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author Kurito
@@ -21,6 +24,8 @@ public class Tablero {
         this.celulas = new Celula[CANTFILAS][CANTCOLUMNAS];
         this.cuadrantes = new Posicion[4][2];
         this.calcularCuadrantes();
+        this.llenarMatriz();
+        this.generarAleatoriamente();
     }
 
     private void calcularCuadrantes() {
@@ -69,6 +74,34 @@ public class Tablero {
         return this.celulas[pos.getX()][pos.getY()];
     }
 
+    public void generarAleatoriamente() {
+        int celulasVivas = 10;
+        ArrayList<Posicion> posiciones = new ArrayList();
+        int x, y;
+        
+
+        for (int i = 0; i < celulasVivas; i++) {
+            Random rand = new Random();
+            x = rand.nextInt(5 - 1 + 1) + 1;
+            y = rand.nextInt(5 - 1 + 1) + 1;
+            Posicion posicionNueva = new Posicion(x, y);
+            if (!posiciones.contains(new Posicion(x, y))) {
+                while (posiciones.contains(posicionNueva)) {
+                    x = rand.nextInt(5 - 1 + 1) + 1;
+                    y = (int) rand.nextInt(5 - 1 + 1) + 1;
+                    posicionNueva = new Posicion(x, y);
+
+                }
+                posiciones.add(posicionNueva);
+            } else {
+                posiciones.add(posicionNueva);
+            }
+        }
+        posiciones.forEach((posicion) -> {
+            celulas[posicion.getX()-1][posicion.getY()-1] = new Celula(0, true);
+        });
+    }
+
     public Celula getCelula(int x, int y) {
         return this.celulas[x][y];
     }
@@ -77,16 +110,27 @@ public class Tablero {
         return celulas;
     }
 
-    public Posicion[] getCuadrante(int cuadrante){
+    public Posicion[] getCuadrante(int cuadrante) {
         return this.cuadrantes[cuadrante];
     }
-    
+
     public static int getCANTFILAS() {
         return CANTFILAS;
     }
 
     public static int getCANTCOLUMNAS() {
         return CANTCOLUMNAS;
+    }
+
+    private void llenarMatriz() {
+        int nroCelula = 1;
+        for(int i=0; i < CANTFILAS ; i++){
+            for(int j=0; j < CANTCOLUMNAS;j++ ){
+                celulas[i][j] = new Celula(nroCelula,false);
+                nroCelula++;
+            }
+        }
+        
     }
 
 }

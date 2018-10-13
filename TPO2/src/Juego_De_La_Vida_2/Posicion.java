@@ -38,4 +38,16 @@ public class Posicion {
         String cadena = "Fila: " + x + "\nColumna: " + this.y;
         return cadena;
     }
+    @Override
+     public boolean equals(Object posicion)
+    {
+        boolean SonIguales = false;
+
+        if (posicion != null && posicion instanceof Posicion)
+        {
+            SonIguales = (this.x == ((Posicion) posicion).x) && (this.y == ((Posicion) posicion).y);
+        }
+
+        return SonIguales;
+    }
 }

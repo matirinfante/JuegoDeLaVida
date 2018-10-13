@@ -11,18 +11,17 @@ package laboratorioprogramacion;
  */
 public class Tarea implements Runnable {
 
-    private boolean verificando;
-    private boolean cambiando;
+    private boolean yaVerifico;
     private Tablero tablero;
     private int nroCuadrante;
     private int nroTarea;
+    private Manager variable;
 
-    public Tarea(boolean cambiando, boolean verificando, Tablero tablero, int cuadrante, int nroTarea) {
-        this.cambiando = cambiando;
-        this.verificando = verificando;
+    public Tarea(Manager variable, Tablero tablero, int cuadrante, int nroTarea) {
         this.tablero = tablero;
         this.nroCuadrante = cuadrante;
         this.nroTarea = nroTarea;
+        this.variable = variable;
     }
 
     public int getNroTarea() {
@@ -38,7 +37,7 @@ public class Tarea implements Runnable {
     }
 
     public boolean isVerificando() {
-        return verificando;
+        return yaVerifico;
     }
 
     public Tablero getTablero() {
@@ -49,36 +48,28 @@ public class Tarea implements Runnable {
         this.tablero = tablero;
     }
 
-    public void setVerificando(boolean verificando) {
-        this.verificando = verificando;
-    }
-
-    public boolean isCambiando() {
-        return cambiando;
-    }
-
-    public void setCambiando(boolean cambiando) {
-        this.cambiando = cambiando;
-    }
-
     @Override
     public void run() {
-        while (true) {
-            while (verificando) {
-                Posicion[] cuadrante = tablero.getCuadrante(this.nroCuadrante);
-
-                for (int i = cuadrante[0].getX(); i < cuadrante[0].getY(); i++) {
-                    for (int j = cuadrante[1].getX(); j < cuadrante[1].getY(); j++) {
-                        
-                        verificarCelulasAlrededor(new Posicion (i,j));
+        //variable verificando y cambiando hay que hacerlos como variable compartida
+        Posicion[] cuadrante = tablero.getCuadrante(this.nroCuadrante);
+        if (variable.isEstaverificando()) {
+            for (int i = cuadrante[0].getX(); i < cuadrante[0].getY(); i++) {
+                for (int j = cuadrante[1].getX(); j < cuadrante[1].getY(); j++) {
+                    verificarCelulasAlrededor(new Posicion(i, j));
+                }
+            }
+        } else {
+            for (int i = cuadrante[0].getX(); i < cuadrante[0].getY(); i++) {
+                for (int j = cuadrante[1].getX(); j < cuadrante[1].getY(); j++) {
+                    Celula objCelula = tablero.getCelula(new Posicion(i, j));
+                    if (objCelula.getdebeCambiar()) {
+                        objCelula.setEstado(!objCelula.getEstado());
                     }
                 }
             }
 
-            while (cambiando) {
-
-            }
         }
+        variable.terminoTarea();
     }
 
     private void verificar() {
