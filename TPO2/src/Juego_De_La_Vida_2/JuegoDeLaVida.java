@@ -23,14 +23,16 @@ public class JuegoDeLaVida {
         Motor manejadorDeHilos = new Motor();
         Tablero tablero = new Tablero();
         Manager manager = new Manager();
+        int cantFilas = Tablero.CANTFILAS;
+        
         tablero.mostrarTablero();
         System.out.println("-----------------------------------------------");
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < cantFilas; i++) {
             Tarea tarea = new Tarea(manager, tablero, i, i);
             manejadorDeHilos.ejecutaTarea(tarea);
         }
         while (true) {
-            if (manager.hilosActual == 4 || manager.hilosActual == 0) {
+            if (manager.hilosActual == cantFilas || manager.hilosActual == 0) {
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException ex) {

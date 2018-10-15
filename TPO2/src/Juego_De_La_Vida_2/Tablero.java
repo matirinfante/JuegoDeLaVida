@@ -15,8 +15,8 @@ import java.util.Random;
 public class Tablero {
 
     private Celula[][] celulas;
-    private static final int CANTFILAS = 6;
-    private static final int CANTCOLUMNAS = 6;
+    public static final int CANTFILAS = 6;
+    public static final int CANTCOLUMNAS = 6;
     private boolean estaVerificando;
     private Posicion[][] cuadrantes;
 

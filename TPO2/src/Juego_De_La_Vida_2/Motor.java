@@ -27,7 +27,7 @@ public class Motor {
 
     public Motor() {
         this.cantHilosActivos = 0;
-        this.cantHilos = 4;
+        this.cantHilos = Tablero.CANTFILAS;
         executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(this.cantHilos);//Crea el objeto executor o un pool de threads  
     }
 

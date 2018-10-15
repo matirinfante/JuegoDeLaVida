@@ -23,14 +23,14 @@ public class Manager {
 
     public Manager() {
         this.modificando = new Semaphore(0);
-        this.verificando = new Semaphore(4);
+        this.verificando = new Semaphore(Tablero.CANTFILAS);
         this.mutex = new Semaphore(1);
     }
 
     public void verificando(int cuadrante) throws InterruptedException {
         System.out.println(Thread.currentThread().getName() + " esperando para verificar.");
         verificando.acquire();
-        System.out.println(Thread.currentThread().getName() + " está en verificando el cuadrante " + (cuadrante + 1));
+        System.out.println(Thread.currentThread().getName() + " está en verificando la fila " + (cuadrante + 1));
 
         System.out.println("Cant Hilo " + hilosActual);
 
@@ -39,7 +39,7 @@ public class Manager {
     public void terminoVerificar() throws InterruptedException {
         mutex.acquire();
         hilosActual += 1;
-        if (hilosActual == 4) {
+        if (hilosActual == Tablero.CANTFILAS) {
             hilosActual = 0;
             this.liberarParaVerificar();
 
@@ -52,16 +52,16 @@ public class Manager {
     public void modificando(int cuadrante) throws InterruptedException {
         System.out.println(Thread.currentThread().getName() + " esperando para modificar.");
         verificando.acquire();
-        System.out.println(Thread.currentThread().getName() + " está en modificando el cuadrante " + (cuadrante + 1));
+        System.out.println(Thread.currentThread().getName() + " está en modificando la fila " + (cuadrante + 1));
 
-        System.out.println("Cant Hilo " + hilosActual);
+//        System.out.println("Cant Hilo " + hilosActual);
 
     }
 
     public void terminoModificar() throws InterruptedException {
         mutex.acquire();
         hilosActual += 1;
-        if (hilosActual == 4) {
+        if (hilosActual == Tablero.CANTFILAS) {
             hilosActual = 0;
             this.liberarParaVerificar();
         }
@@ -71,10 +71,10 @@ public class Manager {
     }
 
     public void liberarParaModificar() {
-        this.modificando.release(4);
+        this.modificando.release(Tablero.CANTFILAS);
     }
 
     public void liberarParaVerificar() {
-        this.verificando.release(4);
+        this.verificando.release(Tablero.CANTFILAS);
     }
 }
