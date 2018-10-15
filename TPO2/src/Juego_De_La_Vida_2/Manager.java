@@ -5,6 +5,8 @@
  */
 package laboratorioprogramacion;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author Kurito
@@ -15,43 +17,64 @@ public class Manager {
     public boolean estaCambiando;
     public int hilosActual = 0;
 
+    private Semaphore mutex;
+    private Semaphore verificando;
+    private Semaphore modificando;
+
     public Manager() {
-        this.estaCambiando = false;
-        this.estaverificando = false;
+        this.modificando = new Semaphore(0);
+        this.verificando = new Semaphore(4);
+        this.mutex = new Semaphore(1);
     }
 
-    public synchronized void terminoTarea() {
-        hilosActual++;
+    public void verificando(int cuadrante) throws InterruptedException {
+        System.out.println(Thread.currentThread().getName() + " esperando para verificar.");
+        verificando.acquire();
+        System.out.println(Thread.currentThread().getName() + " está en verificando el cuadrante " + (cuadrante + 1));
+
+        System.out.println("Cant Hilo " + hilosActual);
+
+    }
+
+    public void terminoVerificar() throws InterruptedException {
+        mutex.acquire();
+        hilosActual += 1;
         if (hilosActual == 4) {
             hilosActual = 0;
-            if (estaverificando) {
-                estaverificando = false;
-                estaCambiando = true;
-            } else {
-                estaverificando = true;
-                estaCambiando = false;
-            }
+            this.liberarParaVerificar();
+
         }
+        mutex.release();
+        System.out.println(Thread.currentThread().getName() + " terminó de verificar.");
 
     }
 
-    public synchronized void resetCantHilos() {
-        hilosActual = 0;
+    public void modificando(int cuadrante) throws InterruptedException {
+        System.out.println(Thread.currentThread().getName() + " esperando para modificar.");
+        verificando.acquire();
+        System.out.println(Thread.currentThread().getName() + " está en modificando el cuadrante " + (cuadrante + 1));
+
+        System.out.println("Cant Hilo " + hilosActual);
+
     }
 
-    public synchronized boolean isEstaverificando() {
-        return estaverificando;
+    public void terminoModificar() throws InterruptedException {
+        mutex.acquire();
+        hilosActual += 1;
+        if (hilosActual == 4) {
+            hilosActual = 0;
+            this.liberarParaVerificar();
+        }
+        mutex.release();
+        System.out.println(Thread.currentThread().getName() + " terminó de verificar.");
+
     }
 
-    public void setEstaverificando(boolean estaverificando) {
-        this.estaverificando = estaverificando;
+    public void liberarParaModificar() {
+        this.modificando.release(4);
     }
 
-    public boolean isEstaCambiando() {
-        return estaCambiando;
-    }
-
-    public void setEstaCambiando(boolean estaCambiando) {
-        this.estaCambiando = estaCambiando;
+    public void liberarParaVerificar() {
+        this.verificando.release(4);
     }
 }

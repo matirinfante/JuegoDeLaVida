@@ -54,42 +54,43 @@ public class Tarea implements Runnable {
     @Override
     public void run() {
         //variable verificando y cambiando hay que hacerlos como variable compartida
-        Posicion[] cuadrante = tablero.getCuadrante(this.nroCuadrante);
-        if (variable.isEstaverificando()) {
-            for (int i = cuadrante[0].getX(); i < cuadrante[1].getY(); i++) {
-                for (int j = cuadrante[0].getX(); j < cuadrante[1].getY(); j++) {
-                    verificarCelulasAlrededor(new Posicion(i, j));
+        while (true) {
+            Posicion[] cuadrante = tablero.getCuadrante(this.nroCuadrante);
+            try {
+                variable.verificando(nroCuadrante);
+                this.verificar(cuadrante);
+                Thread.sleep(4000);
+                variable.terminoVerificar();
 
-                }
-            }
-            try {
-                System.out.println("La tarea " + nroTarea + " está verificando el cuadrante " + this.nroCuadrante);
-                Thread.sleep(2000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Tarea.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            for (int i = cuadrante[0].getX(); i < cuadrante[1].getY(); i++) {
-                for (int j = cuadrante[0].getX(); j < cuadrante[1].getY(); j++) {
-                    Celula objCelula = tablero.getCelula(new Posicion(i, j));
-                    if (objCelula.getdebeCambiar()) {
-                        objCelula.setEstado(!objCelula.getEstado());
-                    }
-                }
-            }
-            try {
-                System.out.println("La tarea " + nroTarea + " está cambiando el cuadrante " + this.nroCuadrante);
-                Thread.sleep(3000);
+                variable.modificando(nroCuadrante);
+                this.modificar(cuadrante);
+                Thread.sleep(4000);
+                variable.terminoModificar();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Tarea.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
-        variable.terminoTarea();
     }
 
-    private void verificar() {
+    private void verificar(Posicion[] cuadrante) {
+        for (int i = cuadrante[0].getX(); i < cuadrante[1].getY(); i++) {
+            for (int j = cuadrante[0].getX(); j < cuadrante[1].getY(); j++) {
+                verificarCelulasAlrededor(new Posicion(i, j));
+            }
+        }
+    }
 
+    private void modificar(Posicion[] cuadrante) {
+
+        for (int i = cuadrante[0].getX(); i < cuadrante[1].getY(); i++) {
+            for (int j = cuadrante[0].getX(); j < cuadrante[1].getY(); j++) {
+                Celula objCelula = tablero.getCelula(new Posicion(i, j));
+                if (objCelula.getdebeCambiar()) {
+                    objCelula.setEstado(!objCelula.getEstado());
+                }
+            }
+        }
     }
 
     public void verificarCelulasAlrededor(Posicion pos) {

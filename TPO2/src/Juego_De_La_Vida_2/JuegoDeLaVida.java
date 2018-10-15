@@ -7,6 +7,8 @@ package laboratorioprogramacion;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,16 +25,20 @@ public class JuegoDeLaVida {
         Manager manager = new Manager();
         tablero.mostrarTablero();
         System.out.println("-----------------------------------------------");
+        for (int i = 0; i < 4; i++) {
+            Tarea tarea = new Tarea(manager, tablero, i, i);
+            manejadorDeHilos.ejecutaTarea(tarea);
+        }
         while (true) {
             if (manager.hilosActual == 4 || manager.hilosActual == 0) {
-                for (int i = 0; i < 4; i++) {
-                    Tarea tarea = new Tarea(manager, tablero, i, i);
-                    manejadorDeHilos.ejecutaTarea(tarea);
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(JuegoDeLaVida.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                tablero.mostrarTablero();
+                System.out.println("-----------------------------------------------");
             }
-            tablero.mostrarTablero();
-            System.out.println("-----------------------------------------------");
-
         }
     }
 
