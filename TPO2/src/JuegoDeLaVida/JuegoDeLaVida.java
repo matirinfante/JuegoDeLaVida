@@ -26,28 +26,31 @@ public class JuegoDeLaVida {
 
         ExecutorService magia = Executors.newFixedThreadPool(cantFilas);
 
-        
         tablero.mostrarTablero();
         System.out.println("-----------------------------------------------");
- 
+
         while (true) {
-            System.out.println("\tIteracion "+iteracion);
-            Set<Callable<Tarea>> tareas = new HashSet(); 
+            if (modo) {
+                System.out.println("\tIteracion " + iteracion);
+            }
+            Set<Callable<Tarea>> tareas = new HashSet();
             iteracion++;
             for (int i = 0; i < cantFilas; i++) {
-            tareas.add(new Tarea(tablero, i, i, modo));
+                tareas.add(new Tarea(tablero, i, i, modo));
             }
-            
+
             magia.invokeAll(tareas);
-            
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(JuegoDeLaVida.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(JuegoDeLaVida.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (!modo) {
                 tablero.mostrarTablero();
                 System.out.println("-----------------------------------------------");
-                modo = !modo;
+            }
+            modo = !modo;
         }
     }
 
