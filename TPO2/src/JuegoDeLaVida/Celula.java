@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package JuegoDeLaVida;
 
-
-/**
- *
- * @author Kurito
- */
 public class Celula {
 
     private int nroCelula;
@@ -41,7 +32,10 @@ public class Celula {
     public void debeCambiar() {
         this.debeCambiar = true;
     }
-
+    
+    public void cambio(){
+        this.debeCambiar = false;
+    }
     public boolean getdebeCambiar() {
         return this.debeCambiar;
     }
