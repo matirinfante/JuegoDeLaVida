@@ -37,13 +37,13 @@ public class Tarea implements Callable {
     }
 
     private void verificar() {
-        for (int j = 0; j < Tablero.CANTCOLUMNAS; j++) {
+        for (int j = 0; j < Tablero.getCANTCOLUMNAS(); j++) {
             verificarCelulasAlrededor(new Posicion(nroFila, j));
         }
     }
 
     private void modificar() {
-        for (int j = 0; j < Tablero.CANTCOLUMNAS; j++) {
+        for (int j = 0; j < Tablero.getCANTCOLUMNAS(); j++) {
             Celula objCelula = tablero.getCelula(new Posicion(nroFila, j));
             if (objCelula.getdebeCambiar()) {
 

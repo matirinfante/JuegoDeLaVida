@@ -13,10 +13,10 @@ public class JuegoDeLaVida {
     public static void main(String[] args) throws InterruptedException {
 
         Tablero tablero = new Tablero();
-        int cantFilas = Tablero.CANTFILAS;
+        int cantFilas = Tablero.getCANTFILAS();
         boolean modo = true;
-
-        ExecutorService executor = Executors.newFixedThreadPool(cantFilas / 2);
+        int cantTareas = cantFilas/2;
+        ExecutorService executor = Executors.newFixedThreadPool(cantTareas);
 
         System.out.println(tablero.mostrarTablero());
         System.out.println("\u001B[34m▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
@@ -26,8 +26,9 @@ public class JuegoDeLaVida {
         for (int i = 0; i < cantFilas; i++) {
             tareas.add(new Tarea(tablero, i, i, modo));
         }
-
-        while (true) {
+        int cantEjecuciones = 5 * 2;
+        int i = 0;
+        while (i <= cantEjecuciones) {
             executor.invokeAll(tareas);
             try {
                 Thread.sleep(1000);
@@ -43,9 +44,17 @@ public class JuegoDeLaVida {
             for (Callable<Tarea> tarea : tareas) {
                 ((Tarea) tarea).setModo(modo);
             }
-
+            i++;
         }
-
+        executor.shutdown();
+        System.out.println("**************************************");
+        System.out.println("*********FIN DE LA EJECUCION**********");
+        System.out.println("**************************************");
+        System.out.println("CANTIDAD DE VIVAS: " + tablero.getCantVivas());
+        System.out.println("CANTIDAD DE MUERTAS: " + tablero.getCantMuertas());
+        System.out.println("CANTIDAD DE EJECUCIONES: "+ cantEjecuciones/2);
+        System.out.println("CANTIDAD DE TAREAS: "+ cantTareas );
+        System.out.println("\u001B[34m▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
     }
-    //executor.shutdown();
+
 }

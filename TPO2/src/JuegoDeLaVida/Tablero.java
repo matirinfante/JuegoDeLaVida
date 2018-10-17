@@ -6,14 +6,33 @@ import java.util.Random;
 public class Tablero {
 
     private Celula[][] celulas;
-    public static final int CANTFILAS = 10;
-    public static final int CANTCOLUMNAS = 10;
+    private static final int CANTFILAS = 10;
+    private static final int CANTCOLUMNAS = 10;
     private boolean estaVerificando;
 
+    
+    
     public Tablero() {
         this.celulas = new Celula[CANTFILAS][CANTCOLUMNAS];
         this.llenarMatriz();
         this.generarAleatoriamente();
+    }
+
+   
+    public int getCantMuertas() {
+        return (CANTFILAS * CANTCOLUMNAS) - getCantVivas();
+    }
+
+    public int getCantVivas() {
+        int cantVivas = 0;
+        for (int i = 0; i < CANTFILAS; i++) {
+            for (int j = 0; j < CANTCOLUMNAS; j++) {
+                if (celulas[i][j].getEstado()) {
+                    cantVivas++;
+                }
+            }
+        }
+        return cantVivas;
     }
 
     public String mostrarTablero() {
@@ -21,9 +40,9 @@ public class Tablero {
         for (int i = 0; i < CANTFILAS; i++) {
             for (int j = 0; j < CANTFILAS; j++) {
                 if (celulas[i][j].getEstado()) {
-                    estado += "\u001B[32m"+Character.toString((char)9673);
+                    estado += "\u001B[32m" + Character.toString((char) 9673);
                 } else {
-                    estado += "\u001B[31m"+Character.toString((char)9678);
+                    estado += "\u001B[31m" + Character.toString((char) 9678);
                 }
                 estado += " \u001B[0m";
 
