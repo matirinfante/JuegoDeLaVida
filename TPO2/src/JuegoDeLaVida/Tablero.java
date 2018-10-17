@@ -1,4 +1,3 @@
-
 package JuegoDeLaVida;
 
 import java.util.ArrayList;

@@ -1,4 +1,3 @@
-
 package JuegoDeLaVida;
 
 import java.util.HashSet;
@@ -12,38 +11,41 @@ import java.util.logging.Logger;
 public class JuegoDeLaVida {
 
     public static void main(String[] args) throws InterruptedException {
+
         Tablero tablero = new Tablero();
         int cantFilas = Tablero.CANTFILAS;
         boolean modo = true;
 
-        ExecutorService executor = Executors.newFixedThreadPool(cantFilas);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
 
         System.out.println(tablero.mostrarTablero());
         System.out.println("---------------------");
 
+        Set<Callable<Tarea>> tareas = new HashSet();
+
+        for (int i = 0; i < cantFilas; i++) {
+            tareas.add(new Tarea(tablero, i, i, modo));
+        }
+
         while (true) {
-            if (modo) {
-                //System.out.println("\tIteracion " + iteracion);
-            }
-            Set<Callable<Tarea>> tareas = new HashSet();
-            //iteracion++;
-            for (int i = 0; i < cantFilas; i++) {
-                tareas.add(new Tarea(tablero, i, i, modo));
-            }
-
             executor.invokeAll(tareas);
-
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(JuegoDeLaVida.class.getName()).log(Level.SEVERE, null, ex);
             }
+
             if (!modo) {
                 System.out.println(tablero.mostrarTablero());
                 System.out.println("---------------------");
             }
             modo = !modo;
-        }
-    }
+            for (Callable<Tarea> tarea : tareas) {
+                ((Tarea) tarea).setModo(modo);
+            }
 
+        }
+
+    }
+    //executor.shutdown();
 }
