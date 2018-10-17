@@ -16,10 +16,10 @@ public class JuegoDeLaVida {
         int cantFilas = Tablero.CANTFILAS;
         boolean modo = true;
 
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(cantFilas / 2);
 
         System.out.println(tablero.mostrarTablero());
-        System.out.println("---------------------");
+        System.out.println("\u001B[34m▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
 
         Set<Callable<Tarea>> tareas = new HashSet();
 
@@ -37,7 +37,7 @@ public class JuegoDeLaVida {
 
             if (!modo) {
                 System.out.println(tablero.mostrarTablero());
-                System.out.println("---------------------");
+                System.out.println("\u001B[34m▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
             }
             modo = !modo;
             for (Callable<Tarea> tarea : tareas) {

@@ -6,8 +6,8 @@ import java.util.Random;
 public class Tablero {
 
     private Celula[][] celulas;
-    public static final int CANTFILAS = 6;
-    public static final int CANTCOLUMNAS = 6;
+    public static final int CANTFILAS = 10;
+    public static final int CANTCOLUMNAS = 10;
     private boolean estaVerificando;
 
     public Tablero() {
@@ -21,11 +21,11 @@ public class Tablero {
         for (int i = 0; i < CANTFILAS; i++) {
             for (int j = 0; j < CANTFILAS; j++) {
                 if (celulas[i][j].getEstado()) {
-                    estado += "O";
+                    estado += "\u001B[32m"+Character.toString((char)9673);
                 } else {
-                    estado += "X";
+                    estado += "\u001B[31m"+Character.toString((char)9678);
                 }
-                estado += "  ";
+                estado += " \u001B[0m";
 
             }
             estado += "\n";
@@ -38,7 +38,7 @@ public class Tablero {
     }
 
     public void generarAleatoriamente() {
-        int celulasVivas = 10;
+        int celulasVivas = 25;
         ArrayList<Posicion> posiciones = new ArrayList();
         int x, y;
 
