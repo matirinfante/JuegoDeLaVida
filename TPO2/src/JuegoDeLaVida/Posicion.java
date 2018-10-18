@@ -1,5 +1,8 @@
 package JuegoDeLaVida;
 
+/* El proposito de esta clase es facilitar una tupla con coordenadas correspondientes
+a la posición en la matriz de cada celula*/
+
 public class Posicion {
 
     private int x, y;

@@ -7,17 +7,17 @@ public class Tarea implements Callable {
     private Tablero tablero;
     private int nroFila;
     private int nroTarea;
-    private boolean verificar;
+    private boolean modo;
 
     public Tarea(Tablero tablero, int nroFila, int nroTarea, boolean modo) {
         this.tablero = tablero;
         this.nroFila = nroFila;
         this.nroTarea = nroTarea;
-        this.verificar = modo;
+        this.modo = modo;
     }
 
     public void setModo(boolean mode) {
-        this.verificar = mode;
+        this.modo = mode;
     }
 
     public int getNroTarea() {
@@ -43,6 +43,7 @@ public class Tarea implements Callable {
     }
 
     private void modificar() {
+        //Modifica el estado de las celulas a las cuales en el paso Verificar se las marcó debeCambiar en true.
         for (int j = 0; j < Tablero.getCANTCOLUMNAS(); j++) {
             Celula objCelula = tablero.getCelula(new Posicion(nroFila, j));
             if (objCelula.getdebeCambiar()) {
@@ -54,6 +55,7 @@ public class Tarea implements Callable {
     }
 
     public void verificarCelulasAlrededor(Posicion pos) {
+        //Método encargado de verificar el estado de las celulas circundantes a la célula actual.
         Celula celula = this.tablero.getCelula(pos);
         int contarVivas = 0;
         int aux1, aux2;
@@ -102,13 +104,11 @@ public class Tarea implements Callable {
 
     @Override
     public Object call() throws Exception {
-        //variable verificando y cambiando hay que hacerlos como variable compartida
-        if (this.verificar) {
+        //Dependiendo del modo, verifica o modifica.
+        if (this.modo) {
             this.verificar();
-            //this.setModo(false);
         } else {
             this.modificar();
-            //this.setModo(true);
         }
         return null;
     }

@@ -9,8 +9,6 @@ public class Tablero {
     private static final int CANTFILAS = 10;
     private static final int CANTCOLUMNAS = 10;
     private boolean estaVerificando;
-
-    
     
     public Tablero() {
         this.celulas = new Celula[CANTFILAS][CANTCOLUMNAS];
